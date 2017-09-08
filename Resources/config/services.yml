@@ -1,0 +1,24 @@
+services:
+    mdespeuilles.redirect.entity.not_found:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - Mdespeuilles\RedirectBundle\Entity\NotFound
+
+    mdespeuilles.redirect.entity.redirect:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - Mdespeuilles\RedirectBundle\Entity\Redirect
+
+    mdespeuilles.redirect.notfound_listener:
+        class: Mdespeuilles\RedirectBundle\EventListener\NotFoundListener
+        arguments: ["@doctrine.orm.entity_manager", '@service_container']
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
+    mdespeuilles.redirect.redirect_listener:
+        class: Mdespeuilles\RedirectBundle\EventListener\RedirectListener
+        arguments: ["@doctrine.orm.entity_manager", '@service_container']
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
