@@ -1,0 +1,14 @@
+easy_admin:
+    design:
+        menu:
+            - label: 'SEO'
+              icon: 'cloud'
+              children:
+                  - { label: 'Not found', entity: 'NotFound', icon: 'file-text' }
+                  - { label: 'Redirect', entity: 'Redirect', icon: 'file-text' }
+
+    entities:
+          NotFound:
+              class: Mdespeuilles\RedirectBundle\Entity\NotFound
+          Redirect:
+              class: Mdespeuilles\RedirectBundle\Entity\Redirect
